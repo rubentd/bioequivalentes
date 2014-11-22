@@ -1,3 +1,7 @@
+body{
+	overflow: hidden;
+}
+
 .container{
 	width: 100%;
 	margin: 0;
@@ -18,14 +22,43 @@
 }
 
 .navbar-toggle{
-	margin-right: 0;
+	margin-right: 5px;
 }
 
 .searchbar{
 	margin-bottom: 20px;
 }
 
- @media only screen and (max-width:480px) {
+#results .list-group-item{
+	cursor: pointer;
+}
+
+.panel{
+	width: 100%;
+	position: absolute;
+	right: 0;
+	-webkit-transition: right .3s ease-in-out;
+	   -moz-transition: right .3s ease-in-out;
+			transition: right .3s ease-in-out;
+}
+
+.slide-right{
+	right: -100%;
+}
+
+.slide-left{
+	right: 100%;
+}
+
+a.glyphicon{
+	color: black;
+	text-decoration: none;
+	font-size: 20px;
+	padding-left: 0;
+}
+
+
+@media only screen and (max-width:480px) {
 
 	.jumbotron p{
 		font-size: 14px;
