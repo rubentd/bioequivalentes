@@ -1,5 +1,5 @@
 body{
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 .container{
@@ -33,6 +33,10 @@ body{
 	cursor: pointer;
 }
 
+h5{
+	margin-bottom: 10px;
+}
+
 .panel{
 	width: 100%;
 	position: absolute;
@@ -57,10 +61,14 @@ a.glyphicon{
 	padding-left: 0;
 }
 
-
 @media only screen and (max-width:480px) {
 
 	.jumbotron p{
 		font-size: 14px;
+	}
+
+	.jumbotron p.main{
+		font-size: 16px;
+		padding-bottom: 30px;
 	}
 }

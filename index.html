@@ -23,7 +23,10 @@
 	        <search-bar></search-bar>
 
 	    	<div class="col-md-12">
-	    		<div id="results" class="bs-component" ng-show="search.results.length"> 
+	    		<div id="results" class="bs-component" ng-show="search.results.length">
+	    			<h5>
+	    				&iquest;Est&aacute;s buscando alguno de estos?
+	    			</h5>	
 		    		<ul class="list-group">
 		    			<li class="list-group-item" ng-repeat="result in search.results" 
 		    			ng-click="search.getDetails(result.id)">
