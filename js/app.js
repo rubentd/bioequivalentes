@@ -13,7 +13,7 @@
 
 			db.transaction(function (tx) {
 				tx.executeSql('DROP TABLE IF EXISTS bioequivalence', [], function(){
-					tx.executeSql('CREATE TABLE bioequivalence ( id unique, usage TEXT, active_ingredient TEXT, reference_product TEXT, reference_product_lab TEXT, bioequivalent_product TEXT, register TEXT, bioequivalent_lab TEXT, resolution TEXT, date TEXT)', [], function(){
+					tx.executeSql('CREATE TABLE bioequivalence ( id unique, usage TEXT, active_ingredient TEXT, bioequivalent_product TEXT, register TEXT, bioequivalent_lab TEXT, resolution TEXT, date TEXT)', [], function(){
 						$http.get('data/results.json')
 						.success( function(data){
 							db.transaction(function (tx) {
@@ -25,17 +25,16 @@
 					});
 				});
 			});
+
 		};
 
 		this.find = function(){
 			var query = $("#search_query").val();
-			
 			search.results = [];
-			
 			if(query != undefined && query.length > 0){
-				
 				db.transaction( function(tx) {
-					tx.executeSql('SELECT * FROM bioequivalence WHERE bioequivalent_product like ? or active_ingredient like ?', ['%' + query + '%', '%' + query + '%'], function(tx, results){
+                    ql = '%'+query+'%';
+					tx.executeSql('SELECT * FROM bioequivalence WHERE bioequivalent_product like ? or active_ingredient like ?', [ql, ql], function(tx, results){
 						for (var i=0; i < results.rows.length; i++){
 							row = results.rows.item(i);
 							search.results.push(row);
@@ -43,54 +42,50 @@
 						$scope.$apply();
 					});
 				});
-
 			}
 		};
 
 		this.getDetails = function(id){
-
 			$('#listing').addClass('slide-left');
 			$('#details').removeClass('slide-right');
+			this.setProduct(id);
+			$("body").animate({ scrollTop: "0px" }, 300);
+		};
 
-			this.productDetails = {
-				'bioequivalent_product': 'Fart pills',
-				'bioequivalent_lab': 'FartLabs',
-				'usage': 'Ass cancer',
-				'register': 'LOL-123',
-				'register': 'Resolución 123123',
-				'date': '2014-01-01', 
-
-				'bioequivalents': [
-					{
-						id: 1, 
-						bioequivalent_product: 'Shit pills', 
-						bioequivalent_product_lab: 'Shit Labs'
-					},
-					{
-						id: 2, 
-						bioequivalent_product: 'Vomit medicine', 
-						bioequivalent_product_lab: 'Vomit Labs'
-					},
-					{
-						id: 3, 
-						bioequivalent_product: 'Vomit medicine', 
-						bioequivalent_product_lab: 'Vomit Labs'
+		this.setBioequivalents = function() {
+			search.bioequivalents = [];
+			db.transaction(function(tx) {
+				sqlQuery ='SELECT * FROM bioequivalence WHERE active_ingredient = ? AND id <> ?';
+				data = [search.productDetails.active_ingredient, search.productDetails.id];
+				tx.executeSql(sqlQuery, data, function(tx, results) {
+					for (var i=0; i < results.rows.length; i++){
+						row = results.rows.item(i);
+						search.bioequivalents.push(row);
 					}
-				]
-			};
-
-			this.setPrices(this.productDetails);
+					$scope.$apply();
+				});
+			});
+			
+			this.setPrices(search.bioequivalents);
 
 		};
 
-		this.setPrices = function(product){
-			for(var i = 0; i < product.bioequivalents.length; i++){
-				this.setPrice(product.bioequivalents[i]);
+		this.setPrices = function(bioequivalents){
+			for(var i = 0; i < bioequivalents.length; i++){
+				bioequivalents[i].price = 100;
 			}
 		};
 
-		this.setPrice = function(product){
-			product.price = 100;
+		this.setProduct = function(id) {
+			// getting the data of the medicine
+			db.transaction(function(tx) {
+				tx.executeSql('SELECT * FROM bioequivalence WHERE id = ?', [id], function(tx, results){
+					search.productDetails = results.rows.item(0);
+					$scope.$apply();
+					// getting the bioequivalents
+					search.setBioequivalents();
+				});
+			});
 		};
 
 		this.goToListing = function(){

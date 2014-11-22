@@ -46,29 +46,40 @@
 
 	    <div id="details" class="panel slide-right">
 	    	<div class="col-md-12">
-	    		<h2>
+	    		<h3>
 					<a href="#list" class="col-md-2 glyphicon glyphicon-chevron-left" 
 		    			ng-click="search.goToListing()"></a>
 		    		<span>
 		    			{{search.productDetails.bioequivalent_product}}
 					</span>
-				</h2>
+				</h3>
 				<p>
-					Laboratorio: 
+					<label>Laboratorio:</label>
 					{{search.productDetails.bioequivalent_lab}}
 				</p>
 				<p>
-					Uso:
+					<label>Principio activo:</label> 
+					{{search.productDetails.active_ingredient}}
+				</p>
+				<p>
+					<label>Uso:</label>
 					{{search.productDetails.usage}}
 				</p>
 	    	</div>
 	    	<div id="equivalents" class="col-md-12 equivalents">
 	    		<h5>Bioequivalentes:</h5>
-	    		<ul ng-show="search.productDetails.bioequivalents.length > 0" 
+	    		<ul ng-show="search.bioequivalents.length > 0" 
 	    			class="list-group">
 
-	    			<li class="list-group-item" ng-repeat="product in search.productDetails.bioequivalents">
-	    				{{product.bioequivalent_product}}
+	    			<li class="pointer list-group-item" 
+	    			ng-repeat="product in search.bioequivalents"
+	    			ng-click="search.getDetails(product.id)">
+	    				<h5>
+	    					{{product.bioequivalent_product}}
+	    				</h5>
+	    				<small>
+	    					{{product.bioequivalent_lab}}
+	    				</small>
 	    			</li>
 	    		</ul>
 	    	</div>

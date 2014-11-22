@@ -1,8 +1,9 @@
-body{
-	overflow-x: hidden;
+html {
+    overflow-x: hidden;
+    overflow-y: scroll; 
 }
 
-h2{
+h2, h3{
 	margin-top: 0;
 }
 
@@ -41,6 +42,10 @@ h5{
 	margin-bottom: 10px;
 }
 
+.pointer{
+	cursor: pointer;
+}
+
 .panel{
 	width: 100%;
 	position: absolute;
@@ -73,8 +78,22 @@ a.glyphicon{
 	padding-right: 0;
 }
 
-.equivalents h5{
-	padding: 0 5px;
+.equivalents > h5{
+	padding: 20px;
+	background-color: #dedede;
+	margin: 0;
+}
+
+.secondary{
+	margin-top: 0;
+	padding: 20px 10px;
+	background-color: #eee;
+	padding-bottom: 50px;
+}
+
+.jumbotron{
+	margin-top: 10px;
+	margin-bottom: 0;
 }
 
 @media only screen and (max-width:480px) {
@@ -85,6 +104,9 @@ a.glyphicon{
 
 	.jumbotron p.main{
 		font-size: 16px;
-		padding-bottom: 30px;
+	}
+
+	small{
+		font-size: 12px;
 	}
 }
