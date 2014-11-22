@@ -7,13 +7,14 @@
 		this.results = [];
 		this.mode = 'listing';
 		this.productDetails = {};
+		var search = this;
 
 		this.init = function(){
 			var search = this;
 
 			db.transaction(function (tx) {
 				tx.executeSql('DROP TABLE IF EXISTS bioequivalence', [], function(){
-					tx.executeSql('CREATE TABLE bioequivalence ( id unique, usage TEXT, active_ingredient TEXT, reference_product TEXT, reference_product_lab TEXT, bioequivalent_product TEXT, register TEXT, bioequivalent_lab TEXT, resolution TEXT, date TEXT)', [], function(){
+					tx.executeSql('CREATE TABLE bioequivalence ( id unique, usage TEXT, active_ingredient TEXT, bioequivalent_product TEXT, register TEXT, bioequivalent_lab TEXT, resolution TEXT, date TEXT)', [], function(){
 						$http.get('data/results.json')
 						.success( function(data){
 							db.transaction(function (tx) {
@@ -29,14 +30,11 @@
 
 		this.find = function(){
 			var query = $("#search_query").val();
-			var search = this;
-
 			search.results = [];
-			
 			if(query != undefined && query.length > 0){
-				
 				db.transaction( function(tx) {
-					tx.executeSql('SELECT * FROM bioequivalence WHERE bioequivalent_product like ? or active_ingredient like ?', ['%' + query + '%', '%' + query + '%'], function(tx, results){
+                    ql = '%'+query+'%';
+					tx.executeSql('SELECT * FROM bioequivalence WHERE bioequivalent_product like ? or active_ingredient like ?', [ql, ql], function(tx, results){
 						for (var i=0; i < results.rows.length; i++){
 							row = results.rows.item(i);
 							search.results.push(row);
@@ -44,19 +42,40 @@
 						$scope.$apply();
 					});
 				});
-
 			}
 		};
 
 		this.getDetails = function(id){
-
 			$('#listing').addClass('slide-left');
 			$('#details').removeClass('slide-right');
+			this.setProduct(id);
+		};
 
-			this.productDetails = {
-				'reference_product': 'Zolven',
-				'reference_product_lab': 'Novartis'
-			};
+		this.setProduct = function(id) {
+			// getting the data of the medicine
+			db.transaction(function(tx) {
+				tx.executeSql('SELECT * FROM bioequivalence WHERE id = ?', [id], function(tx, results){
+					search.productDetails = results.rows.item(0);
+					$scope.$apply();
+					// getting the bioequivalents
+					search.setBioequivalents();
+				});
+			});
+		};
+
+		this.setBioequivalents = function() {
+			search.bioequivalents = [];
+			db.transaction(function(tx) {
+				sqlQuery ='SELECT * FROM bioequivalence WHERE active_ingredient = ? AND id <> ?';
+				data = [search.productDetails.active_ingredient, search.productDetails.id];
+				tx.executeSql(sqlQuery, data, function(tx, results) {
+					for (var i=0; i < results.rows.length; i++){
+						row = results.rows.item(i);
+						search.bioequivalents.push(row);
+					}
+					$scope.$apply();
+				});
+			});
 		};
 
 		this.goToListing = function(){
