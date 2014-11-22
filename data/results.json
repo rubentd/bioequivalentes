@@ -1,0 +1,14 @@
+[
+	{ 
+		"id": 1, 
+		"usage": "Analgésicos / Antipirético", 
+		"active_ingredient": "PARACETAMOL", 
+		"reference_product": "Zolben", 
+		"reference_product_lab": "Novartis",
+		"active_ingredient": "PARACETAMOL",
+		"bioequivalent_lab": "Laboratorio Berlimed",
+		"bioequivalent_product": "Focus 500 comprimidos 500 mg",
+		"register": "F-18281",
+		"bioequivalent_lab": "Laboratorio Berlimed"
+	}
+]
