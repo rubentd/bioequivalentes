@@ -11,3 +11,23 @@
 	text-decoration: none;
 	color: inherit;
 }
+
+.centered{
+	margin: 0 auto;
+	max-width: 400px;
+}
+
+.navbar-toggle{
+	margin-right: 0;
+}
+
+.searchbar{
+	margin-bottom: 20px;
+}
+
+ @media only screen and (max-width:480px) {
+
+	.jumbotron p{
+		font-size: 14px;
+	}
+}

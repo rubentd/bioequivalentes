@@ -19,59 +19,45 @@
     <div class="main-content container bs-docs-container">           
         <navigation></navigation>            
     	<div class="col-md-12">
-    		<div class="bs-component"> 
-	    		<ul id="results" class="list-group">
-	    			<li class="list-group-item">
+    		<div id="results" class="bs-component" ng-show="search.results.length"> 
+	    		<ul class="list-group">
+	    			<li class="list-group-item" ng-repeat="result in search.results">
 	    				<a href="details.html">
 		    				<h4 class="list-group-item-heading">
-		    					Shit pills
+		    					{{result.reference_product}}
 		    				</h4>
 		    				<p class="list-group-item-text">
-								Makes your shit shittier
+								{{result.reference_product_lab}}
 		    				</p>
 	    				</a>
-	    			</li>
-	    			<li class="list-group-item">
-	    				<a href="details.html">
-		    				<h4 class="list-group-item-heading">
-		    					Shit pills
-		    				</h4>
-		    				<p class="list-group-item-text">
-								Makes your shit shittier
-		    				</p>
-		    			</a>
-	    			</li>
-	    			<li class="list-group-item">
-	    				<a href="details.html">
-		    				<h4 class="list-group-item-heading">
-		    					Shit pills
-		    				</h4>
-		    				<p class="list-group-item-text">
-								Makes your shit shittier
-		    				</p>
-		    			</a>
 	    			</li>
 	    		</ul>
     		</div>
     	</div>
 
-    	<div class="col-md-12">
-    		<p>
-    			Un Bioequivalente es un medicamento que ha comprobado mediante estudios cient&iacute;ficos, que tiene <b>el mismo efecto que el producto farmac&eacute;utico original.</b> Su eficacia est&aacute; certificada por el Instituto de Salud P&uacute;blica.
-    		</p>
+    	<div id="info" class="bs-conponent" ng-hide="search.results.length">
+    		<div class="jumbotron">
+	    		<p>
+	    			Un Bioequivalente es un medicamento que ha comprobado mediante estudios cient&iacute;ficos, que tiene <b>el mismo efecto que el producto farmac&eacute;utico original.</b> Su eficacia est&aacute; certificada por el Instituto de Salud P&uacute;blica.
+	    		</p>
 
-    		<p>
-    			Podr&aacute;s reconocerlos f&aacute;cilmente mediante un sello de color amarillo en su empaque, presente en al menos 4 de sus 6 caras.
-    		</p>
+	    		<p>
+	    			Podr&aacute;s reconocerlos f&aacute;cilmente mediante un sello de color amarillo en su empaque, presente en al menos 4 de sus 6 caras.
+	    		</p>
 
-    		<p>
-    			Los medicamentos Bioequivalentes
-				<b>son mucho m&aacute;s econ&oacute;micos.</b>
-    		</p>
+	    		<p class="centered">
+	    			<img src="./img/bioequivalente.png" class="img-responsive" alt="Responsive image">
+				</p>
+	    		
+	    		<p>
+	    			Los medicamentos Bioequivalentes
+					<b>son mucho m&aacute;s econ&oacute;micos.</b>
+	    		</p>
 
-    		<a href="http://bioequivalentes.cl/">
-    			M&aacute;s informaci&oacute;n sobre medicamentos Bioequivalentes
-    		</a>
+	    		<a href="http://bioequivalentes.cl/">
+	    			M&aacute;s informaci&oacute;n sobre medicamentos Bioequivalentes
+	    		</a>
+    		</div>
     	</div>
 
     </div> <!-- #main-container -->
