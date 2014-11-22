@@ -7,9 +7,9 @@
 		this.results = [];
 		this.mode = 'listing';
 		this.productDetails = {};
+		var search = this;
 
 		this.init = function(){
-			var search = this;
 
 			db.transaction(function (tx) {
 				tx.executeSql('DROP TABLE IF EXISTS bioequivalence', [], function(){
@@ -29,8 +29,7 @@
 
 		this.find = function(){
 			var query = $("#search_query").val();
-			var search = this;
-
+			
 			search.results = [];
 			
 			if(query != undefined && query.length > 0){
@@ -54,9 +53,44 @@
 			$('#details').removeClass('slide-right');
 
 			this.productDetails = {
-				'reference_product': 'Zolven',
-				'reference_product_lab': 'Novartis'
+				'bioequivalent_product': 'Fart pills',
+				'bioequivalent_lab': 'FartLabs',
+				'usage': 'Ass cancer',
+				'register': 'LOL-123',
+				'register': 'Resolución 123123',
+				'date': '2014-01-01', 
+
+				'bioequivalents': [
+					{
+						id: 1, 
+						bioequivalent_product: 'Shit pills', 
+						bioequivalent_product_lab: 'Shit Labs'
+					},
+					{
+						id: 2, 
+						bioequivalent_product: 'Vomit medicine', 
+						bioequivalent_product_lab: 'Vomit Labs'
+					},
+					{
+						id: 3, 
+						bioequivalent_product: 'Vomit medicine', 
+						bioequivalent_product_lab: 'Vomit Labs'
+					}
+				]
 			};
+
+			this.setPrices(this.productDetails);
+
+		};
+
+		this.setPrices = function(product){
+			for(var i = 0; i < product.bioequivalents.length; i++){
+				this.setPrice(product.bioequivalents[i]);
+			}
+		};
+
+		this.setPrice = function(product){
+			product.price = 100;
 		};
 
 		this.goToListing = function(){
