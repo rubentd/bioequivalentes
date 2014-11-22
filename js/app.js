@@ -3,14 +3,13 @@
 	var app = angular.module('farmAhorro', []);
 	var db = openDatabase('bioequivalents', '1.0', 'bioequivalent medicine', 1024 * 1024 * 1024);
 
-	app.controller('SearchController', ['$http', '$scope', function($http, $scope){
+	app.controller('SearchController', ['$http', '$scope', '$scope', function($http, $scope, $apply){
 		this.results = [];
 		this.mode = 'listing';
 		this.productDetails = {};
 
-		var search = this;
-
 		this.init = function(){
+			var search = this;
 
 			db.transaction(function (tx) {
 				tx.executeSql('DROP TABLE IF EXISTS bioequivalence', [], function(){
@@ -30,16 +29,22 @@
 
 		this.find = function(){
 			var query = $("#search_query").val();
+			var search = this;
+
 			search.results = [];
+			
 			if(query != undefined && query.length > 0){
-				db.transaction(function(tx) {
-					tx.executeSql('SELECT * FROM bioequivalence WHERE bioequivalent_product like ?', ['%' + query + '%'], function(tx, results){
+				
+				db.transaction( function(tx) {
+					tx.executeSql('SELECT * FROM bioequivalence WHERE bioequivalent_product like ? or active_ingredient like ?', ['%' + query + '%', '%' + query + '%'], function(tx, results){
 						for (var i=0; i < results.rows.length; i++){
 							row = results.rows.item(i);
 							search.results.push(row);
-						 }
+						}
+						$scope.$apply();
 					});
 				});
+
 			}
 		};
 
@@ -52,13 +57,15 @@
 				'reference_product': 'Zolven',
 				'reference_product_lab': 'Novartis'
 			};
-		}
+		};
 
 		this.goToListing = function(){
 			$('#listing').removeClass('slide-left');
 			$('#details').addClass('slide-right');
-		}
+		};
+
         this.init();
+
 	}]);
 
 	app.directive("navigation", function(){

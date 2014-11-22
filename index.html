@@ -22,7 +22,7 @@
 		<div id="listing" class="panel">
 	        <search-bar></search-bar>
 
-	    	<div class="col-md-12">
+	        <div class="col-md-12">
 	    		<div id="results" class="bs-component" ng-show="search.results.length">
 	    			<h5>
 	    				&iquest;Est&aacute;s buscando alguno de estos?
@@ -31,10 +31,10 @@
 		    			<li class="list-group-item" ng-repeat="result in search.results" 
 		    			ng-click="search.getDetails(result.id)">
 		    				<h4 class="list-group-item-heading">
-		    					{{result.reference_product}}
+		    					{{result.bioequivalent_product}}
 		    				</h4>
 		    				<p class="list-group-item-text">
-								{{result.reference_product_lab}}
+								{{result.bioequivalent_lab}}
 		    				</p>
 		    			</li>
 		    		</ul>
@@ -47,7 +47,7 @@
 	    <div id="details" class="panel slide-right">
 	    	<div class="col-md-12">
 	    		<h2>
-					<a href="#listing" class="col-md-2 glyphicon glyphicon-chevron-left" 
+					<a href="#list" class="col-md-2 glyphicon glyphicon-chevron-left" 
 		    			ng-click="search.goToListing()"></a>
 		    		<span>
 		    			{{search.productDetails.reference_product}}
