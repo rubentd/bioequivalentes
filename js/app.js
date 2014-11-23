@@ -2,7 +2,7 @@
 
 	$(document).ready( function(){
 
-		$(document).scroll( function(){
+		$(document).on('scroll touchstart touchmove', function(){
 			$(document).scrollLeft(0);
 		});
 
@@ -58,11 +58,10 @@
 			}, 500);
 
 			$("#details").swipe( {
-				swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-					if(direction == 'right'){
-						search.goToListing();
-					}
-				}
+				swipeRight: function(){
+					search.goToListing();
+				}, 
+				allowPageScroll: 'vertical'
 			});
 		};
 
@@ -111,13 +110,6 @@
 		this.init();
 
 	}]);
-
-	app.directive("navigation", function(){
-		return {
-			restrict: 'E',
-			templateUrl: 'navigation.html'
-		};
-	});
 
 	app.directive("searchBar", function(){
 		return {

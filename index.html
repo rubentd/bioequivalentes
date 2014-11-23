@@ -17,10 +17,11 @@
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="main-content container bs-docs-container">           
-        <navigation></navigation>  
 
 		<div id="listing" class="panel">
-	        <search-bar></search-bar>
+			<div class="head">
+				<search-bar></search-bar>
+			</div>
 
 	        <div class="col-md-12 result-wrap">
 	    		<div id="results" class="bs-component" ng-show="search.results.length">
@@ -48,34 +49,34 @@
 	    </div>
 
 	    <div id="details" class="panel slide-right">
-	    	<div class="col-md-12">
-	    		<h3>
+    		<div class="head">
+				<h3>
 					<a href="#list" class="col-md-2 glyphicon glyphicon-chevron-left" 
 		    			ng-click="search.goToListing()"></a>
 		    		<span>
 		    			{{search.productDetails.bioequivalent_product}}
 					</span>
 				</h3>
-				<div class="product-details">
-					<p>
-						<label>Laboratorio:</label>
-						{{search.productDetails.bioequivalent_lab}}
-					</p>
-					<p>
-					<label>Principio activo:</label> 
-						{{search.productDetails.active_ingredient}}
-					</p>
-					<p>
-						<label>Uso:</label>
-						{{search.productDetails.usage}}
-					</p>
-					<p class="price">
-	    				{{ 4500 | currency : $ : 0 }}
-	    			</p>
-				</div>
-				<div class="price-bar" data-price="4500"></div>
+			</div>
+			<div class="product-details col-md-12">
+				<p>
+					<label>Laboratorio:</label>
+					{{search.productDetails.bioequivalent_lab}}
+				</p>
+				<p>
+				<label>Principio activo:</label> 
+					{{search.productDetails.active_ingredient}}
+				</p>
+				<p>
+					<label>Uso:</label>
+					{{search.productDetails.usage}}
+				</p>
+				<p class="price">
+    				{{ 4500 | currency : $ : 0 }}
+    			</p>
+    			<div class="price-bar" data-price="4500"></div>
+			</div>
 
-	    	</div>
 	    	<div id="equivalents" class="col-md-12 equivalents">
 	    		<h5>Bioequivalentes:</h5>
 	    		<ul ng-show="search.bioequivalents.length > 0" 
