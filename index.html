@@ -65,7 +65,9 @@
 				</p>
 				<p>
 				<label>Principio activo:</label> 
-					{{search.productDetails.active_ingredient}}
+					<a href="http://es.wikipedia.org/wiki/{{search.productDetails.active_ingredient | lowercase}}" target="_blank">
+						{{search.productDetails.active_ingredient}}
+					</a>
 				</p>
 				<p>
 					<label>Uso:</label>
@@ -88,14 +90,14 @@
 	    			class="list-group">
 
 	    			<li class="pointer list-group-item" 
-	    			ng-repeat="product in search.bioequivalents | orderBy:'price' | filter:{'price': 0}"
+	    			ng-repeat="product in search.bioequivalents | orderBy:'price'"
 	    			ng-click="search.getDetails(product.id)"
 	    			ng-show="product.price > 0">
 	    				<product></product>
 	    			</li>
 
 	    			<li class="pointer list-group-item" 
-	    			ng-repeat="product in search.bioequivalents | orderBy:'price' | filter:{'price': 0}"
+	    			ng-repeat="product in search.bioequivalents | orderBy:'price'"
 	    			ng-click="search.getDetails(product.id)"
 	    			ng-show="product.price == 0">
 	    				<product></product>
