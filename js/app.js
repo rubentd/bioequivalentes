@@ -32,7 +32,18 @@
 						price: data[i][8]
 					};
 				};
+				search.getLocation();
 			});
+		};
+
+		this.getLocation = function(){
+			if(location.hash.indexOf('details') != -1){
+				var parts = location.hash.split(':');
+				if(parts.length > 0){
+					var id = parts[1];	
+					search.getDetails(id);
+				}
+			}
 		};
 
 		this.find = function(){
@@ -51,6 +62,8 @@
 		};
 
 		this.getDetails = function(id){
+			location.href='#details:' + id;
+
 			$('#listing').addClass('slide-left');
 			$('#details').removeClass('slide-right');
 			this.setProduct(id);
