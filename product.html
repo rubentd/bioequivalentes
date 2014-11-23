@@ -1,0 +1,15 @@
+<div class="equivalent-info">
+	<h5>
+		{{product.bioequivalent_product}}
+	</h5>
+	<small>
+		{{product.bioequivalent_lab}}
+	</small>
+</div>
+<div class="price" ng-show="product.price > 0">
+	{{product.price | currency : $ : 0}}
+</div>	
+<div class="price na" ng-show="product.price == 0">
+	Precio no disponible
+</div>
+<div class="price-bar" data-price="{{product.price}}"></div>
