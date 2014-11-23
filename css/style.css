@@ -11,6 +11,12 @@ h2, h3{
 	margin: 0;
 }
 
+.head.search{
+	position: fixed;
+	z-index: 99;
+	top: -2px;
+}
+
 #details .head{
 	min-height: 100px;
 	padding: 20px 10px;
@@ -75,6 +81,8 @@ h2, h3{
 
 #results .list-group-item{
 	cursor: pointer;
+	width: 100%;
+	display: inline-block;
 }
 
 #results .list-group-item:active{
@@ -83,6 +91,7 @@ h2, h3{
 
 .result-wrap{
 	padding: 0;
+	margin-top: 64px;
 }
 
 .result-wrap h5{
@@ -142,9 +151,13 @@ h5{
 
 .equivalents .list-group-item{
 	cursor: pointer;
+	width: 100%;
+	display: inline-block;
 }
 
 .product-details{
+	display: inline-block;
+	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	background-color: #dedede;
@@ -164,17 +177,31 @@ h5{
 .jumbotron{
 	margin-top: -5px;
 	margin-bottom: 0;
-	padding-top: 50px;
+	padding-top: 30px;
 }
 
 .price{
 	float: right;
 	font-size: 20px;
-	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+div.price.na{
+	font-size: 12px;
+	float: left;
+	display: inline-block;
+	width: 20%;
+	text-align: center;
 }
 
 p.price{
-	margin-top: -20px;
+	margin-bottom: 10px;
+}
+
+.equivalent-info{
+	float: left;
+	display: inline-block;
+	width: 80%;
 }
 
 .price-bar{

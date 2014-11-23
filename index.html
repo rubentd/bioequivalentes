@@ -19,7 +19,7 @@
     <div class="main-content container bs-docs-container">           
 
 		<div id="listing" class="panel">
-			<div class="head">
+			<div class="head search">
 				<search-bar></search-bar>
 			</div>
 
@@ -29,7 +29,7 @@
 	    				&iquest;Est&aacute;s buscando alguno de estos?
 	    			</h5>	
 		    		<ul class="list-group">
-		    			<li class="list-group-item" ng-repeat="result in search.results" 
+		    			<li class="list-group-item" ng-repeat="result in search.results | orderBy : 'price'" 
 		    			ng-click="search.getDetails(result.id)">
 		    				<h4 class="list-group-item-heading">
 		    					{{result.bioequivalent_product}}
@@ -71,13 +71,13 @@
 					<label>Uso:</label>
 					{{search.productDetails.usage}}
 				</p>
-				<p class="price" ng-show="product.price > 0">
-    				{{ product.price | currency : $ : 0 }}
+				<p class="price" ng-show="search.productDetails.price > 0">
+    				{{ search.productDetails.price | currency : $ : 0 }}
     			</p>
-    			<p class="price" ng-show="product.price == 0">
-    				N/A
+    			<p class="price na" ng-show="search.productDetails.price == 0">
+    				Precio no disponible
     			</p>
-    			<div class="price-bar" data-price="{{product.price}}"></div>
+    			<div class="price-bar" data-price="{{search.productDetails.price}}"></div>
 			</div>
 
 	    	<div id="equivalents" class="col-md-12 equivalents">
@@ -86,21 +86,23 @@
 	    			class="list-group">
 
 	    			<li class="pointer list-group-item" 
-	    			ng-repeat="product in search.bioequivalents"
+	    			ng-repeat="product in search.bioequivalents | orderBy:'price' | filter:{price: 0}"
 	    			ng-click="search.getDetails(product.id)">
-	    				<h5>
-	    					{{product.bioequivalent_product}}
-	    				</h5>
-	    				<small>
-	    					{{product.bioequivalent_lab}}
-	    				</small>
+	    				<div class="equivalent-info">
+	    					<h5>
+		    					{{product.bioequivalent_product}}
+		    				</h5>
+		    				<small>
+		    					{{product.bioequivalent_lab}}
+		    				</small>
+	    				</div>
 	    				<div class="price" ng-show="product.price > 0">
 	    					{{product.price | currency : $ : 0}}
+	    				</div>	
+	    				<div class="price na" ng-show="product.price == 0">
+	    					Precio no disponible
 	    				</div>
-	    				<div class="price" ng-show="product.price == 0">
-	    					N/A
-	    				</div>
-	    				<div class="price-bar" data-price="{{product.price}}}"></div>
+	    				<div class="price-bar" data-price="{{product.price}}"></div>
 	    			</li>
 	    		</ul>
 	    	</div>

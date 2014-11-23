@@ -27,7 +27,8 @@
 						bioequivalent_product: data[i][2],
 						bioequivalent_lab: data[i][4],
 						active_ingredient: data[i][1],
-						usage: data[i][7]
+						usage: data[i][7],
+						price: data[i][8]
 					};
 				};
 			});
@@ -55,7 +56,7 @@
 			$("body").animate({ scrollTop: "0px" }, 300);
 			setTimeout( function(){
 				search.setProductsPriceLayout();
-			}, 500);
+			}, 100);
 
 			$("#details").swipe( {
 				swipeRight: function(){
@@ -86,14 +87,14 @@
 		};
 
 		this.setProductsPriceLayout = function(){
-			var maxPrice = 9000;
+			var maxPrice = 0;
 			//Get max Price
 			$('.price').each( function(){
 				var p = $(this).html();
 				$(this).html(p.replace(',', '.'));
 			});
 			$('.price-bar').each( function(){
-				var p = $(this).data('price');
+				var p = parseInt($(this).data('price'));
 				$(this).width('0');
 				if(p > maxPrice){
 					maxPrice = p;
