@@ -8,7 +8,9 @@
 			var s = $(document).scrollTop();
 			var h = $('.product-head-wrap').height();
 			if(s > (h + 40)){
-				$('#details').addClass('sticky');
+				if(!$('#details').hasClass('sticky')){
+					$('#details').addClass('sticky');
+				}
 			}else{
 				$('#details').removeClass('sticky');
 			}

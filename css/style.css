@@ -233,6 +233,7 @@ p.price{
 	min-height: 0;
 	height: auto;
 	padding: 10px;
+	padding-top: 15px;
 }
 
 #details.sticky .head h3{
