@@ -19,23 +19,24 @@
 
 		this.init = function(){
 			var search = this;
-            search.data = {};
-            $http.get('data/results.json').success(function(data) {
+			search.data = {};
+			$http.get('data/results.json').success(function(data) {
 				for (var i=0; i < data.length; i++){
-                    search.data[data[i][0]] = {
-                        id: data[i][0],
-                        bioequivalent_product: data[i][2],
-                        bioequivalent_lab: data[i][4],
-                        active_ingredient: data[i][1],
-                        usage: data[i][7]
-                    };
-                };
-		    });
-        };
+					search.data[data[i][0]] = {
+						id: data[i][0],
+						bioequivalent_product: data[i][2],
+						bioequivalent_lab: data[i][4],
+						active_ingredient: data[i][1],
+						usage: data[i][7]
+					};
+				};
+			});
+		};
 
 		this.find = function(){
 			search.query = $("#search_query").val().toLowerCase();
 			search.results = [];
+
 			if(search.query != undefined && search.query.length > 0){
                 var contains = function(str, q) { return str.toLowerCase().indexOf(q) >= 0 };
                 search.results = $.map(search.data, function(row, index){
@@ -67,16 +68,16 @@
 
 		this.setProduct = function(id) {
 			// getting the data of the product
-            search.productDetails = search.data[id];
+			search.productDetails = search.data[id];
 			search.setBioequivalents();
 		};
 
 		this.setBioequivalents = function() {
-            search.bioequivalents = $.map(search.data, function(row, index) {
-                if (row.active_ingredient == search.productDetails.active_ingredient && index != search.productDetails.id ) {
-                    return row;
-                }
-            });
+			search.bioequivalents = $.map(search.data, function(row, index) {
+				if (row.active_ingredient == search.productDetails.active_ingredient && index != search.productDetails.id ) {
+					return row;
+				}
+			});
 		};
 
 		this.goToListing = function(){
@@ -107,7 +108,7 @@
 			});
 		};
 
-        this.init();
+		this.init();
 
 	}]);
 
