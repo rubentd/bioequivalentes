@@ -1,5 +1,13 @@
 (function() {
 
+	$(document).ready( function(){
+
+		$(document).scroll( function(){
+			$(document).scrollLeft(0);
+		});
+
+	});
+
 	var app = angular.module('farmAhorro', []);
 	var db = openDatabase('bioequivalents', '1.0', 'bioequivalent medicine', 1024 * 1024 * 1024);
 
