@@ -4,6 +4,14 @@
 
 		$(document).on('scroll touchstart touchmove', function(){
 			$(document).scrollLeft(0);
+			
+			var s = $(document).scrollTop();
+			var h = $('.product-head-wrap').height();
+			if(s > (h + 40)){
+				$('#details').addClass('sticky');
+			}else{
+				$('#details').removeClass('sticky');
+			}
 		});
 
 	});
@@ -107,6 +115,7 @@
 		this.goToListing = function(){
 			$('#listing').removeClass('slide-left');
 			$('#details').addClass('slide-right');
+			$("body").animate({ scrollTop: "0px" }, 300);
 		};
 
 		this.init();

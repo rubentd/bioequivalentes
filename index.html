@@ -51,39 +51,41 @@
 	    </div>
 
 	    <div id="details" class="panel slide-right">
-    		<div class="head">
-				<h3>
-					<a href="#list" class="col-md-2 glyphicon glyphicon-chevron-left" 
-		    			ng-click="search.goToListing()"></a>
-		    		<span>
-		    			{{search.productDetails.bioequivalent_product}}
-					</span>
-				</h3>
-			</div>
-			<div class="product-details col-md-12">
-				<p>
-					<label>Laboratorio:</label>
-					{{search.productDetails.bioequivalent_lab}}
-				</p>
-				<p>
-				<label>Principio activo:</label> 
-					<a href="http://es.wikipedia.org/wiki/{{search.productDetails.active_ingredient | lowercase}}" target="_blank">
-						{{search.productDetails.active_ingredient}}
-					</a>
-				</p>
-				<p>
-					<label>Uso:</label>
-					{{search.productDetails.usage}}
-				</p>
-				<p class="price" ng-show="search.productDetails.price > 0">
-    				{{ search.productDetails.price | currency : $ : 0 }}
-    			</p>
-    			<p class="price na" ng-show="search.productDetails.price == 0">
-    				Precio no disponible
-    			</p>
-    			<div class="price-bar" 
-    				data-price="{{search.productDetails.price}}" data-max="{{search.maxPrice}}" 
-    				style="width:{{(search.productDetails.price/search.maxPrice)*100}}%"></div>
+    		<div class="product-head-wrap">
+	    		<div class="head">
+					<h3>
+						<a href="#list" class="col-md-2 glyphicon glyphicon-chevron-left" 
+			    			ng-click="search.goToListing()"></a>
+			    		<span>
+			    			{{search.productDetails.bioequivalent_product}}
+						</span>
+					</h3>
+					<div class="price top">
+						{{search.productDetails.price | currency : $ : 0}}
+					</div>
+					<div class="price-bar" 
+	    				data-price="{{search.productDetails.price}}" data-max="{{search.maxPrice}}" 
+	    				style="width:{{(search.productDetails.price/search.maxPrice)*100}}%"></div>
+				</div>
+				<div class="product-details col-md-12">
+					<p>
+						<label>Laboratorio:</label>
+						{{search.productDetails.bioequivalent_lab}}
+					</p>
+					<p>
+					<label>Principio activo:</label> 
+						<a href="http://es.wikipedia.org/wiki/{{search.productDetails.active_ingredient | lowercase}}" target="_blank">
+							{{search.productDetails.active_ingredient}}
+						</a>
+					</p>
+					<p>
+						<label>Uso:</label>
+						{{search.productDetails.usage}}
+					</p>
+	    			<p class="price na" ng-show="search.productDetails.price == 0">
+	    				Precio no disponible
+	    			</p>
+				</div>
 			</div>
 
 	    	<div id="equivalents" class="col-md-12 equivalents">

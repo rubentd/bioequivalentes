@@ -219,6 +219,39 @@ p.price{
 	pointer-events: none;
 }
 
+#details.sticky .equivalents{
+	margin-top: 120px;
+}
+
+#details.sticky .product-head-wrap{
+	position: fixed;
+	top: -2px;
+	z-index: 99;
+}
+
+#details.sticky .head{
+	min-height: 0;
+	height: auto;
+	padding: 10px;
+}
+
+#details.sticky .head h3{
+	font-size: 18px;
+	width: 75%;
+}
+
+#details.sticky .head .price{
+	font-size: 18px;
+	position: absolute;
+	top: 5px;
+	right: 15px;
+	width: 20%;
+}
+
+#details.sticky .product-details{
+	display: none;
+}
+
 
 @media only screen and (max-width:720px) {
 
