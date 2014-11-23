@@ -59,7 +59,7 @@
 			$("#details").swipe( {
 				swipeRight: function(){
 					search.goToListing();
-				}, 
+				},
 				allowPageScroll: 'vertical'
 			});
 		};
@@ -71,9 +71,15 @@
 		};
 
 		this.setBioequivalents = function() {
+			try {
+				var mg = new RegExp("[0-9,]+ mg").exec(search.productDetails.bioequivalent_product)[0];
+			} catch (e) {
+				mg = '';
+			}
 			search.maxPrice = 0;
 			search.bioequivalents = $.map(search.data, function(row, index) {
-				if (row.active_ingredient == search.productDetails.active_ingredient && index != search.productDetails.id ) {
+				if (row.active_ingredient == search.productDetails.active_ingredient && index != search.productDetails.id
+					&& row.bioequivalent_product.indexOf(mg) >= 0) {
 					if(row.price > search.maxPrice){
 						search.maxPrice = row.price;
 					}
