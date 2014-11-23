@@ -12,4 +12,7 @@
 <div class="price na" ng-show="product.price == 0">
 	Precio no disponible
 </div>
-<div class="price-bar" data-price="{{product.price}}"></div>
+<div class="price-bar" 
+	data-price="{{product.price}}" 
+	data-max="{{search.maxPrice}}"
+	style="width:{{(product.price/search.maxPrice)*100}}%"></div>

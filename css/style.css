@@ -208,7 +208,6 @@ p.price{
 	-webkit-transition: all .6s ease-out;
 	-moz-transition: all .6s ease-out;
 	transition: all .6s ease-out;
-	width: 0%;
 	height: 6px;
 	background-color: black;
 	position: absolute;

@@ -15,6 +15,7 @@
 		this.mode = 'listing';
 		this.productDetails = {};
 		this.query = '';
+		this.maxPrice = 0;
 		var search = this;
 
 		this.init = function(){
@@ -54,9 +55,6 @@
 			$('#details').removeClass('slide-right');
 			this.setProduct(id);
 			$("body").animate({ scrollTop: "0px" }, 300);
-			setTimeout( function(){
-				search.setProductsPriceLayout();
-			}, 100);
 
 			$("#details").swipe( {
 				swipeRight: function(){
@@ -73,39 +71,23 @@
 		};
 
 		this.setBioequivalents = function() {
+			search.maxPrice = 0;
 			search.bioequivalents = $.map(search.data, function(row, index) {
 				if (row.active_ingredient == search.productDetails.active_ingredient && index != search.productDetails.id ) {
+					if(row.price > search.maxPrice){
+						search.maxPrice = row.price;
+					}
 					return row;
 				}
 			});
+			if(search.productDetails.price > search.maxPrice){
+				search.maxPrice = search.productDetails.price;
+			}
 		};
 
 		this.goToListing = function(){
 			$('#listing').removeClass('slide-left');
 			$('#details').addClass('slide-right');
-			$('.price-bar').css('width', '0');
-		};
-
-		this.setProductsPriceLayout = function(){
-			var maxPrice = 0;
-			//Get max Price
-			$('.price').each( function(){
-				var p = $(this).html();
-				$(this).html(p.replace(',', '.'));
-			});
-			$('.price-bar').each( function(){
-				var p = parseInt($(this).data('price'));
-				$(this).width('0');
-				if(p > maxPrice){
-					maxPrice = p;
-				}
-			});
-			//Set width and color in comparison
-			$('.price-bar').each( function(){
-				var p = $(this).data('price');
-				var w = p/maxPrice * 100;
-				$(this).width(w + '%');
-			});
 		};
 
 		this.init();
