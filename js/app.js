@@ -14,6 +14,7 @@
 		this.results = [];
 		this.mode = 'listing';
 		this.productDetails = {};
+		this.query = '';
 		var search = this;
 
 		this.init = function(){
@@ -33,13 +34,13 @@
         };
 
 		this.find = function(){
-			var query = $("#search_query").val().toLowerCase();
+			search.query = $("#search_query").val().toLowerCase();
 			search.results = [];
-			if(query != undefined && query.length > 0){
+			if(search.query != undefined && search.query.length > 0){
                 var contains = function(str, q) { return str.toLowerCase().indexOf(q) >= 0 };
                 search.results = $.map(search.data, function(row, index){
-                    if (contains(row.active_ingredient, query)
-                        || contains(row.bioequivalent_product, query)) {
+                    if (contains(row.active_ingredient, search.query)
+                        || contains(row.bioequivalent_product, search.query)) {
                         return row;
                     }
                 });
@@ -51,6 +52,17 @@
 			$('#details').removeClass('slide-right');
 			this.setProduct(id);
 			$("body").animate({ scrollTop: "0px" }, 300);
+			setTimeout( function(){
+				search.setProductsPriceLayout();
+			}, 500);
+
+			$("#details").swipe( {
+				swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+					if(direction == 'right'){
+						search.goToListing();
+					}
+				}
+			});
 		};
 
 		this.setProduct = function(id) {
@@ -70,6 +82,29 @@
 		this.goToListing = function(){
 			$('#listing').removeClass('slide-left');
 			$('#details').addClass('slide-right');
+			$('.price-bar').css('width', '0');
+		};
+
+		this.setProductsPriceLayout = function(){
+			var maxPrice = 9000;
+			//Get max Price
+			$('.price').each( function(){
+				var p = $(this).html();
+				$(this).html(p.replace(',', '.'));
+			});
+			$('.price-bar').each( function(){
+				var p = $(this).data('price');
+				$(this).width('0');
+				if(p > maxPrice){
+					maxPrice = p;
+				}
+			});
+			//Set width and color in comparison
+			$('.price-bar').each( function(){
+				var p = $(this).data('price');
+				var w = p/maxPrice * 100;
+				$(this).width(w + '%');
+			});
 		};
 
         this.init();

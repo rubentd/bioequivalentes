@@ -37,6 +37,18 @@ h2, h3{
 	cursor: pointer;
 }
 
+#results .list-group-item:active{
+	background-color: #eee;
+}
+
+.result-wrap{
+	padding: 0;
+}
+
+.result-wrap h5{
+	padding: 10px;
+}
+
 h5{
 	margin-bottom: 10px;
 }
@@ -49,6 +61,7 @@ h5{
 	width: 100%;
 	position: absolute;
 	right: 0;
+	margin: 0;
 	-webkit-transition: right .3s ease-in-out;
 	   -moz-transition: right .3s ease-in-out;
 			transition: right .3s ease-in-out;
@@ -63,10 +76,14 @@ h5{
 }
 
 a.glyphicon{
-	color: black;
+	color: #333;
 	text-decoration: none;
 	font-size: 20px;
 	padding-left: 0;
+}
+
+.no-results{
+	padding-bottom: 20px;
 }
 
 .equivalents{
@@ -78,9 +95,22 @@ a.glyphicon{
 }
 
 .equivalents > h5{
-	padding: 20px;
+	padding: 10px 20px;
 	background-color: #dedede;
 	margin: 0;
+}
+
+.equivalents .list-group-item{
+	background-color: #eee;
+	cursor: pointer;
+}
+
+.product-details{
+	padding: 20px 0;
+}
+
+.product-details p{
+	margin-bottom: 0px;
 }
 
 .secondary{
@@ -93,6 +123,29 @@ a.glyphicon{
 .jumbotron{
 	margin-top: 10px;
 	margin-bottom: 0;
+}
+
+.price{
+	float: right;
+	font-size: 20px;
+	margin-top: -10px;
+}
+
+p.price{
+	margin-top: -20px;
+}
+
+.price-bar{
+	-webkit-transition: all .6s ease-out;
+	-moz-transition: all .6s ease-out;
+	transition: all .6s ease-out;
+	width: 0%;
+	height: 6px;
+	background-color: black;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
 }
 
 @media only screen and (max-width:480px) {

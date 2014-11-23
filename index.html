@@ -22,7 +22,7 @@
 		<div id="listing" class="panel">
 	        <search-bar></search-bar>
 
-	        <div class="col-md-12">
+	        <div class="col-md-12 result-wrap">
 	    		<div id="results" class="bs-component" ng-show="search.results.length">
 	    			<h5>
 	    				&iquest;Est&aacute;s buscando alguno de estos?
@@ -40,6 +40,10 @@
 		    		</ul>
 	    		</div>
 	    	</div>
+	    	<div ng-show="search.query.length && search.results.length == 0" 
+	    		class="no-results col-md-12">
+	    		<h5>No hay resultados para tu b&uacute;squeda.</h5>
+	    	</div>
 	    	<static-info></static-info>
 	    </div>
 
@@ -52,18 +56,25 @@
 		    			{{search.productDetails.bioequivalent_product}}
 					</span>
 				</h3>
-				<p>
-					<label>Laboratorio:</label>
-					{{search.productDetails.bioequivalent_lab}}
-				</p>
-				<p>
+				<div class="product-details">
+					<p>
+						<label>Laboratorio:</label>
+						{{search.productDetails.bioequivalent_lab}}
+					</p>
+					<p>
 					<label>Principio activo:</label> 
-					{{search.productDetails.active_ingredient}}
-				</p>
-				<p>
-					<label>Uso:</label>
-					{{search.productDetails.usage}}
-				</p>
+						{{search.productDetails.active_ingredient}}
+					</p>
+					<p>
+						<label>Uso:</label>
+						{{search.productDetails.usage}}
+					</p>
+					<p class="price">
+	    				{{ 4500 | currency : $ : 0 }}
+	    			</p>
+				</div>
+				<div class="price-bar" data-price="4500"></div>
+
 	    	</div>
 	    	<div id="equivalents" class="col-md-12 equivalents">
 	    		<h5>Bioequivalentes:</h5>
@@ -79,6 +90,10 @@
 	    				<small>
 	    					{{product.bioequivalent_lab}}
 	    				</small>
+	    				<div class="price">
+	    					{{ 4500 | currency : $ : 0 }}
+	    				</div>
+	    				<div class="price-bar" data-price="4500"></div>
 	    			</li>
 	    		</ul>
 	    	</div>
@@ -89,6 +104,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/angular.min.js"></script>
+	<script src="js/jquery.touchSwipe.min.js"></script>
 	<script src="js/app.js"></script>
 
 </body>
