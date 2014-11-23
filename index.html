@@ -71,10 +71,13 @@
 					<label>Uso:</label>
 					{{search.productDetails.usage}}
 				</p>
-				<p class="price">
-    				{{ 4500 | currency : $ : 0 }}
+				<p class="price" ng-show="product.price > 0">
+    				{{ product.price | currency : $ : 0 }}
     			</p>
-    			<div class="price-bar" data-price="4500"></div>
+    			<p class="price" ng-show="product.price == 0">
+    				N/A
+    			</p>
+    			<div class="price-bar" data-price="{{product.price}}"></div>
 			</div>
 
 	    	<div id="equivalents" class="col-md-12 equivalents">
@@ -91,10 +94,13 @@
 	    				<small>
 	    					{{product.bioequivalent_lab}}
 	    				</small>
-	    				<div class="price">
-	    					{{ 4500 | currency : $ : 0 }}
+	    				<div class="price" ng-show="product.price > 0">
+	    					{{product.price | currency : $ : 0}}
 	    				</div>
-	    				<div class="price-bar" data-price="4500"></div>
+	    				<div class="price" ng-show="product.price == 0">
+	    					N/A
+	    				</div>
+	    				<div class="price-bar" data-price="{{product.price}}}"></div>
 	    			</li>
 	    		</ul>
 	    	</div>
