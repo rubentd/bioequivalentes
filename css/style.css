@@ -175,14 +175,15 @@ h5{
 }
 
 .jumbotron{
-	margin-top: -5px;
+	margin-top: 50px;
 	margin-bottom: 0;
-	padding-top: 30px;
+	padding-top: 5	0px;
 }
 
 .price{
 	float: right;
 	font-size: 20px;
+	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
@@ -192,6 +193,7 @@ div.price.na{
 	display: inline-block;
 	width: 20%;
 	text-align: center;
+	padding-right: 0;
 }
 
 p.price{
@@ -202,6 +204,7 @@ p.price{
 	float: left;
 	display: inline-block;
 	width: 80%;
+	padding-right: 20px;
 }
 
 .price-bar{
@@ -216,7 +219,13 @@ p.price{
 	pointer-events: none;
 }
 
-@media only screen and (max-width:480px) {
+
+@media only screen and (max-width:720px) {
+
+	.jumbotron{
+		margin-top:-5px;
+		padding-top: 10px;
+	}
 
 	.jumbotron p{
 		font-size: 14px;
